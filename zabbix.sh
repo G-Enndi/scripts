@@ -15,7 +15,7 @@ sudo systemctl stop zabbix-agent
 
 #Edite o arquivo zabbix_agentd.conf no /etc/zabbix e altere as linhas
 sudo sed -i "s/Server=127.0.0.1/Server=10.0.80.68/"  /etc/zabbix/zabbix_agentd.conf
-sudo sed -i "s/ServerActive=127.0.0.1/Server=10.0.80.68/" /etc/zabbix/zabbix_agentd.conf
+sudo sed -i "s/ServerActive=127.0.0.1/ServerActive=10.0.80.68/" /etc/zabbix/zabbix_agentd.conf
 sudo sed -i "s/Hostname=Zabbix server/Hostname=Ustorage 40/" /etc/zabbix/zabbix_agentd.conf
 
 sudo systemctl enable zabbix-agent
