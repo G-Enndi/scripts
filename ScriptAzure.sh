@@ -13,6 +13,7 @@ echo "mysql-server-5.6 mysql-server/root_password_again password $mysqlPassword"
 #install mysql-server 5.6
 sudo apt-get -y install mysql-server-5.6
 
+sed -i "s/bind-address[[:space:]]*\=[[:space:]]*[0-9]\{1,3\}.[0-9]\{1,3\}.[0-9]\{1,3\}.[0-9]\{1,3\}/bind-address=0.0.0.0/g" /etc/mysql/my.cnf
 #set the password
 #sudo mysqladmin -u root password "$mysqlPassword"   #without -p means here the initial password is empty
 
@@ -20,9 +21,9 @@ sudo apt-get -y install mysql-server-5.6
 #sudo mysql -u root -e "set password for 'root'@'localhost' = PASSWORD('$mysqlPassword')"
 #without -p here means the initial password is empty
 
-mysql -e "CREATE USER $adminServer@localhost IDENTIFIED BY $mysqlPassword';"
-mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$adminServer'@'localhost';"
-mysql -e "FLUSH PRIVILEGES;"
+mysql -e -p$mysqlPassword "CREATE USER '$adminServer'@'%' IDENTIFIED BY '$mysqlPassword';"
+mysql -e -p$mysqlPassword "GRANT ALL PRIVILEGES ON *.* TO '$adminServer'@'%';"
+mysql -e -p$mysqlPassword "FLUSH PRIVILEGES;"
 
 
-#sudo service mysql restart
+service mysql restart
