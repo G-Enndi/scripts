@@ -21,9 +21,9 @@ sed -i "s/bind-address[[:space:]]*\=[[:space:]]*[0-9]\{1,3\}.[0-9]\{1,3\}.[0-9]\
 #sudo mysql -u root -e "set password for 'root'@'localhost' = PASSWORD('$mysqlPassword')"
 #without -p here means the initial password is empty
 
-mysql -e -p$mysqlPassword "CREATE USER '$adminServer'@'%' IDENTIFIED BY '$mysqlPassword';"
-mysql -e -p$mysqlPassword "GRANT ALL PRIVILEGES ON *.* TO '$adminServer'@'%';"
-mysql -e -p$mysqlPassword "FLUSH PRIVILEGES;"
+mysql -p$mysqlPassword -e "CREATE USER '$adminServer'@'%' IDENTIFIED BY '$mysqlPassword';"
+mysql -p$mysqlPassword -e "GRANT ALL PRIVILEGES ON *.* TO '$adminServer'@'%';"
+mysql -p$mysqlPassword -e "FLUSH PRIVILEGES;"
 
 
 service mysql restart
